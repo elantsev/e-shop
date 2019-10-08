@@ -1,7 +1,6 @@
 import React from "react";
 import Product from "./Product";
 import Title from "./Title";
-import { storeProducts } from "../data";
 import { ProductConsumer } from "../context";
 
 const ProductList = () => {
@@ -12,15 +11,20 @@ const ProductList = () => {
           <Title name="our" title="products" />
           <div className="row">
             <ProductConsumer>
-              {products =>
-                products.map(product => <Product product={product} />)
+              {({ products, handleDetail, addToCart }) =>
+                products.map(product => (
+                  <Product
+                    product={product}
+                    key={product.id}
+                    handleDetail={handleDetail}
+                    addToCart={addToCart}
+                  />
+                ))
               }
             </ProductConsumer>
           </div>
         </div>
       </div>
-
-      {/*  */}
     </>
   );
 };

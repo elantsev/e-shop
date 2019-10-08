@@ -22,7 +22,7 @@ const Navbar = () => {
       </ul>
       <Link to="/cart" className="ml-auto">
         <ButtonContainer>
-          <i className="fas fa-cart-plus mr-2" />
+          {/* <i className="fas fa-cart-plus mr-2" /> */}
           my cart
         </ButtonContainer>
       </Link>
