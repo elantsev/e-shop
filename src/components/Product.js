@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Product = ({ product, handleDetail, addToCart }) => {
   const { id, title, img, price, inCart } = product;
@@ -40,6 +41,16 @@ const Product = ({ product, handleDetail, addToCart }) => {
 };
 
 export default Product;
+
+Product.propType = {
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    img: PropTypes.string,
+    price: PropTypes.number,
+    inCart: PropTypes.bool
+  }).isRequired
+};
 
 const ProductWrapper = styled.div`
   .card {
