@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Details = () => {
   return (
     <ProductConsumer>
-      {({ detailProduct, addToCart }) => {
+      {({ detailProduct, addToCart, openModal }) => {
         const { id, company, img, info, price, title, inCart } = detailProduct;
         return (
           <div className="container py-5">
@@ -41,7 +41,10 @@ const Details = () => {
                   <ButtonContainer
                     cart
                     disabled={inCart}
-                    onClick={() => addToCart(id)}
+                    onClick={() => {
+                      addToCart(id);
+                      openModal(id);
+                    }}
                   >
                     {inCart ? "inCart" : "add to cart"}
                   </ButtonContainer>

@@ -11,13 +11,14 @@ const ProductList = () => {
           <Title name="our" title="products" />
           <div className="row">
             <ProductConsumer>
-              {({ products, handleDetail, addToCart }) =>
+              {({ products, handleDetail, addToCart, openModal }) =>
                 products.map(product => (
                   <Product
                     product={product}
                     key={product.id}
                     handleDetail={handleDetail}
                     addToCart={addToCart}
+                    openModal={openModal}
                   />
                 ))
               }

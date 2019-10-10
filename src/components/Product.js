@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const Product = ({ product, handleDetail, addToCart }) => {
+const Product = ({ product, handleDetail, addToCart, openModal }) => {
   const { id, title, img, price, inCart } = product;
   return (
     <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
@@ -15,7 +15,10 @@ const Product = ({ product, handleDetail, addToCart }) => {
           <button
             className="cart-btn"
             disabled={inCart}
-            onClick={() => addToCart(id)}
+            onClick={() => {
+              addToCart(id);
+              openModal(id);
+            }}
           >
             {inCart ? (
               <p className="text-capitalize mb-0">in cart</p>
