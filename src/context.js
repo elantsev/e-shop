@@ -6,7 +6,7 @@ const ProductContext = React.createContext();
 const initialState = {
   products,
   detailProduct,
-  cart: products,
+  cart: [],
   modalOpen: false,
   modalProduct: detailProduct,
   cartSubTotal: 0,
