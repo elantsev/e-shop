@@ -6,9 +6,12 @@ const ProductContext = React.createContext();
 const initialState = {
   products,
   detailProduct,
-  cart: [],
+  cart: products,
   modalOpen: false,
-  modalProduct: detailProduct
+  modalProduct: detailProduct,
+  cartSubTotal: 0,
+  cartTax: 0,
+  cartTotal: 0
 };
 
 const ProductProvider = ({ children }) => {
@@ -47,11 +50,36 @@ const ProductProvider = ({ children }) => {
       cart: [...state.cart, currentProduct]
     }));
   };
-  console.log(state);
+
+  const increment = id => {
+    console.log("increment", id);
+  };
+
+  const decrement = id => {
+    console.log("decrement", id);
+  };
+
+  const removeItem = id => {
+    console.log("removeItem", id);
+  };
+
+  const clearCart = () => {
+    console.log("clearCart");
+  };
 
   return (
     <ProductContext.Provider
-      value={{ ...state, handleDetail, addToCart, openModal, closeModal }}
+      value={{
+        ...state,
+        handleDetail,
+        addToCart,
+        openModal,
+        closeModal,
+        increment,
+        decrement,
+        removeItem,
+        clearCart
+      }}
     >
       {children}
     </ProductContext.Provider>
