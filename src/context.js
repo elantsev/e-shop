@@ -43,7 +43,7 @@ const ProductProvider = ({ children }) => {
   };
 
   const addToCart = id => {
-    const currentProduct = state.products.find(product => product.id === id);
+    let currentProduct = state.products.find(product => product.id === id);
     currentProduct.inCart = true;
     currentProduct.count = currentProduct.count += 1;
     currentProduct.total = currentProduct.count * currentProduct.price;
@@ -78,6 +78,9 @@ const ProductProvider = ({ children }) => {
   };
 
   const removeItem = id => {
+    let currentProduct = state.products.find(product => product.id === id);
+    currentProduct.inCart = false;
+    currentProduct.total = 0;
     setState(state => ({
       ...state,
       cart: [...state.cart.filter(product => product.id !== id)]
@@ -85,6 +88,10 @@ const ProductProvider = ({ children }) => {
   };
 
   const clearCart = () => {
+    state.cart.forEach(product => {
+      product.inCart = false;
+      product.total = 0;
+    });
     setState(state => ({
       ...state,
       cart: []
@@ -92,12 +99,13 @@ const ProductProvider = ({ children }) => {
   };
 
   const addTotals = () => {
-    const cartSubTotal = state.cart.reduce(
+    let cartSubTotal = state.cart.reduce(
       (acc, product) => acc + product.price * product.count,
       0
     );
-    const cartTax = cartSubTotal * 0.1;
-    const cartTotal = cartSubTotal + cartTax;
+    cartSubTotal = +cartSubTotal.toFixed(2);
+    const cartTax = +(cartSubTotal * 0.1).toFixed(2);
+    const cartTotal = +(cartSubTotal + cartTax).toFixed(2);
     setState(state => ({
       ...state,
       cartSubTotal,
