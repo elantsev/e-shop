@@ -1,7 +1,7 @@
 import React from "react";
 
 const CartItem = ({ item, value }) => {
-  const { id, title, img, price, total, count } = item;
+  const { id, title, img, price, count } = item;
   const { increment, decrement, removeItem } = value;
   return (
     <div className="row my-2 text-capitalize text-center">

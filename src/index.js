@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import { ProductProvider } from "./context";
+// require("dotenv").config();
 
 ReactDOM.render(
   <ProductProvider>
