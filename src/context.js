@@ -54,33 +54,27 @@ const ProductProvider = ({ children }) => {
   };
 
   const increment = id => {
+    let currentProduct = state.products.find(product => product.id === id);
+    currentProduct.count += 1;
     setState(state => ({
       ...state,
-      cart: [
-        ...state.cart.map(product => {
-          if (product.id === id) product.count += 1;
-          return product;
-        })
-      ]
+      cart: [...state.cart]
     }));
   };
 
   const decrement = id => {
+    let currentProduct = state.products.find(product => product.id === id);
+    currentProduct.count -= 1;
     setState(state => ({
       ...state,
-      cart: [
-        ...state.cart.map(product => {
-          if (product.id === id && product.count >= 1) product.count -= 1;
-          return product;
-        })
-      ]
+      cart: [...state.cart]
     }));
   };
 
   const removeItem = id => {
     let currentProduct = state.products.find(product => product.id === id);
     currentProduct.inCart = false;
-    currentProduct.total = 0;
+    currentProduct.count = 0;
     setState(state => ({
       ...state,
       cart: [...state.cart.filter(product => product.id !== id)]
@@ -90,7 +84,7 @@ const ProductProvider = ({ children }) => {
   const clearCart = () => {
     state.cart.forEach(product => {
       product.inCart = false;
-      product.total = 0;
+      product.count = 0;
     });
     setState(state => ({
       ...state,
