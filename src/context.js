@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { storeProducts as products, detailProduct } from "./data";
 
 const ProductContext = React.createContext();
@@ -16,6 +16,7 @@ const initialState = {
 
 const ProductProvider = ({ children }) => {
   const [state, setState] = useState(JSON.parse(JSON.stringify(initialState)));
+  useEffect(() => addTotals(), [state.cart]);
 
   const openModal = id => {
     const currentProduct = state.products.find(product => product.id === id);
@@ -42,9 +43,10 @@ const ProductProvider = ({ children }) => {
   };
 
   const addToCart = id => {
-    console.log(id);
     const currentProduct = state.products.find(product => product.id === id);
     currentProduct.inCart = true;
+    currentProduct.count = currentProduct.count += 1;
+    currentProduct.total = currentProduct.count * currentProduct.price;
     setState(state => ({
       ...state,
       cart: [...state.cart, currentProduct]
@@ -52,19 +54,56 @@ const ProductProvider = ({ children }) => {
   };
 
   const increment = id => {
-    console.log("increment", id);
+    setState(state => ({
+      ...state,
+      cart: [
+        ...state.cart.map(product => {
+          if (product.id === id) product.count += 1;
+          return product;
+        })
+      ]
+    }));
   };
 
   const decrement = id => {
-    console.log("decrement", id);
+    setState(state => ({
+      ...state,
+      cart: [
+        ...state.cart.map(product => {
+          if (product.id === id && product.count >= 1) product.count -= 1;
+          return product;
+        })
+      ]
+    }));
   };
 
   const removeItem = id => {
-    console.log("removeItem", id);
+    setState(state => ({
+      ...state,
+      cart: [...state.cart.filter(product => product.id !== id)]
+    }));
   };
 
   const clearCart = () => {
-    console.log("clearCart");
+    setState(state => ({
+      ...state,
+      cart: []
+    }));
+  };
+
+  const addTotals = () => {
+    const cartSubTotal = state.cart.reduce(
+      (acc, product) => acc + product.price * product.count,
+      0
+    );
+    const cartTax = cartSubTotal * 0.1;
+    const cartTotal = cartSubTotal + cartTax;
+    setState(state => ({
+      ...state,
+      cartSubTotal,
+      cartTax,
+      cartTotal
+    }));
   };
 
   return (

@@ -1,8 +1,4 @@
 import React from "react";
-// import Title from "../Title";
-// import CartColumns from "./CartColumns";
-// import EmptyCart from "./EmptyCard";
-// import { ProductConsumer } from "../../context";
 
 const CartItem = ({ item, value }) => {
   const { id, title, img, price, total, count } = item;
@@ -44,7 +40,7 @@ const CartItem = ({ item, value }) => {
         </div>
       </div>
       <div className="col-10 mx-auto col-lg-2">
-        <strong>item total : {total}</strong>
+        <strong>item total : {price * count}</strong>
       </div>
     </div>
   );

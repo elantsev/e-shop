@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const CartTotals = ({ state }) => {
   const { cartSubTotal, cartTax, cartTotal, clearCart } = state;
+
   return (
     <>
       <div className="container">
