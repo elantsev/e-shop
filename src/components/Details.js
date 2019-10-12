@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ProductConsumer } from "../context";
 import { ButtonContainer } from "./Button";
 import { Link } from "react-router-dom";
 
-const Details = () => {
+const Details = ({ match }) => {
   return (
     <ProductConsumer>
-      {({ detailProduct, addToCart, openModal }) => {
+      {({ detailProduct, addToCart, openModal, handleDetail }) => {
         const { id, company, img, info, price, title, inCart } = detailProduct;
+        if (+match.params.id !== id) {
+          handleDetail(+match.params.id);
+        }
         return (
           <div className="container py-5">
             <div className="row">
