@@ -1,26 +1,19 @@
 import React from "react";
 import Product from "./Product";
 import Title from "./Title";
-import { ProductConsumer } from "../context";
+import { useSelector } from "react-redux";
 
 const ProductList = () => {
+  const products = useSelector(state => state.productData.products);
+
   return (
     <div className="py-5">
       <div className="container">
         <Title name="our" title="products" />
         <div className="row">
-          <ProductConsumer>
-            {({ products, addToCart, openModal }) =>
-              products.map(product => (
-                <Product
-                  product={product}
-                  key={product.id}
-                  addToCart={addToCart}
-                  openModal={openModal}
-                />
-              ))
-            }
-          </ProductConsumer>
+          {products.map(product => (
+            <Product product={product} key={product.id} />
+          ))}
         </div>
       </div>
     </div>

@@ -2,15 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
-import { handleDetailAC } from "../actions/handleDetail";
-import { handleAddToCartAC } from "../actions/addToCart";
+import { useDispatch } from "react-redux";
+import {
+  handleDetailAC,
+  handleAddToCartAC,
+  openModalAC
+} from "../actions/productData";
 
-const Product = ({ product, openModal }) => {
+const Product = ({ product }) => {
   const { id, title, img, price, inCart } = product;
   const dispatch = useDispatch();
   const handleDetail = id => dispatch(handleDetailAC(id));
   const addToCart = id => dispatch(handleAddToCartAC(id));
+  const openModal = id => dispatch(openModalAC(id));
 
   return (
     <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">

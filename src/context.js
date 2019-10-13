@@ -4,7 +4,7 @@ import { storeProducts as products, detailProduct } from "./data";
 const ProductContext = React.createContext();
 
 const initialState = {
-  products,
+  // products,
   detailProduct,
   cart: [],
   modalOpen: false,
@@ -31,25 +31,6 @@ const ProductProvider = ({ children }) => {
     setState(state => ({
       ...state,
       modalOpen: false
-    }));
-  };
-
-  // const handleDetail = id => {
-  //   const currentProduct = state.products.find(product => product.id === id);
-  //   setState(state => ({
-  //     ...state,
-  //     detailProduct: currentProduct
-  //   }));
-  // };
-
-  const addToCart = id => {
-    let currentProduct = state.products.find(product => product.id === id);
-    currentProduct.inCart = true;
-    currentProduct.count = currentProduct.count += 1;
-    // currentProduct.total = currentProduct.count * currentProduct.price;
-    setState(state => ({
-      ...state,
-      cart: [...state.cart, currentProduct]
     }));
   };
 
@@ -112,8 +93,6 @@ const ProductProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         ...state,
-        // handleDetail,
-        addToCart,
         openModal,
         closeModal,
         increment,

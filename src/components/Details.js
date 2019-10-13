@@ -2,8 +2,11 @@ import React from "react";
 import { ButtonContainer } from "./Button";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { handleDetailAC } from "../actions/handleDetail";
-import { handleAddToCartAC } from "../actions/addToCart";
+import {
+  handleDetailAC,
+  handleAddToCartAC,
+  openModalAC
+} from "../actions/productData";
 
 const Details = ({ match }) => {
   const detailProduct = useSelector(state => state.productData.detailProduct);
@@ -13,6 +16,7 @@ const Details = ({ match }) => {
   const { id, company, img, info, price, title, inCart } = detailProduct;
   const handleDetail = id => dispatch(handleDetailAC(id));
   const addToCart = id => dispatch(handleAddToCartAC(id));
+  const openModal = id => dispatch(openModalAC(id));
   if (+match.params.id !== id) {
     handleDetail(+match.params.id);
   }
@@ -49,9 +53,10 @@ const Details = ({ match }) => {
             <ButtonContainer
               cart
               disabled={inCart}
-              onClick={() => {
+              onClick={e => {
+                e.preventDefault();
                 addToCart(id);
-                // openModal(id);
+                openModal(id);
               }}
             >
               {inCart ? "inCart" : "add to cart"}
