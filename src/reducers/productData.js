@@ -1,4 +1,9 @@
-import { HANDLE_DETAIL, ADD_TO_CART, OPEN_MODAL } from "../actions/productData";
+import {
+  HANDLE_DETAIL,
+  ADD_TO_CART,
+  OPEN_MODAL,
+  CLOSE_MODAL
+} from "../actions/productData";
 import { storeProducts as products, detailProduct } from "../data";
 
 const initialState = {
@@ -40,11 +45,16 @@ export const productData = (state = initialState, action) => {
       currentProduct = state.products.find(
         product => product.id === action.payload.id
       );
-
       return {
         ...state,
         modalProduct: currentProduct,
         modalOpen: true
+      };
+
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        modalOpen: false
       };
 
     default:

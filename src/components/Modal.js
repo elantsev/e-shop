@@ -1,46 +1,44 @@
 import React from "react";
-
 import styled from "styled-components";
-import { ProductConsumer } from "../context";
 import { ButtonContainer } from "./Button";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { closeModalAC } from "../actions/productData";
 
 const Modal = () => {
+  const dispatch = useDispatch();
+  const { modalOpen, modalProduct } = useSelector(state => state.productData);
+
+  const { img, title, price } = modalProduct;
+  let closeModal = () => dispatch(closeModalAC());
   return (
-    <ProductConsumer>
-      {({ modalOpen, modalProduct, closeModal }) => {
-        const { img, title, price } = modalProduct;
-        return (
-          modalOpen && (
-            <ModalContainer>
-              <div className="container">
-                <div className="row">
-                  <div
-                    id="modal"
-                    className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5"
-                  >
-                    <h5>added to the cart</h5>
-                    <img src={img} className="img-fluid" alt="product" />
-                    <h5>{title}</h5>
-                    <h5 className="text-muted">price : {price}</h5>
-                    <Link to="/">
-                      <ButtonContainer onClick={() => closeModal()}>
-                        Store
-                      </ButtonContainer>
-                    </Link>
-                    <Link to="/cart">
-                      <ButtonContainer cart onClick={() => closeModal()}>
-                        go to cart
-                      </ButtonContainer>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </ModalContainer>
-          )
-        );
-      }}
-    </ProductConsumer>
+    modalOpen && (
+      <ModalContainer>
+        <div className="container">
+          <div className="row">
+            <div
+              id="modal"
+              className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5"
+            >
+              <h5>added to the cart</h5>
+              <img src={img} className="img-fluid" alt="product" />
+              <h5>{title}</h5>
+              <h5 className="text-muted">price : {price}</h5>
+              <Link to="/">
+                <ButtonContainer onClick={() => closeModal()}>
+                  Store
+                </ButtonContainer>
+              </Link>
+              <Link to="/cart">
+                <ButtonContainer cart onClick={() => closeModal()}>
+                  go to cart
+                </ButtonContainer>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </ModalContainer>
+    )
   );
 };
 
