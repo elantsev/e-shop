@@ -10,7 +10,7 @@ const Modal = () => {
   const { modalOpen, modalProduct } = useSelector(state => state.productData);
 
   const { img, title, price } = modalProduct;
-  let closeModal = () => dispatch(closeModalAC());
+  const closeModal = () => dispatch(closeModalAC());
   return (
     modalOpen && (
       <ModalContainer>

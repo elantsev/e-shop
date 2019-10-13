@@ -1,8 +1,8 @@
 import React from "react";
 
-const CartItem = ({ item, value }) => {
+
+const CartItem = ({ item, increment, decrement, removeItem }) => {
   const { id, title, img, price, count } = item;
-  const { increment, decrement, removeItem } = value;
   return (
     <div className="row my-2 text-capitalize text-center">
       <div className="col-10 mx-auto col-lg-2">

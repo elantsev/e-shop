@@ -18,41 +18,6 @@ const ProductProvider = ({ children }) => {
   const [state, setState] = useState(JSON.parse(JSON.stringify(initialState)));
   // useEffect(() => addTotals(), [state.cart]);
 
-  const closeModal = () => {
-    setState(state => ({
-      ...state,
-      modalOpen: false
-    }));
-  };
-
-  const increment = id => {
-    let currentProduct = state.products.find(product => product.id === id);
-    currentProduct.count += 1;
-    setState(state => ({
-      ...state,
-      cart: [...state.cart]
-    }));
-  };
-
-  const decrement = id => {
-    let currentProduct = state.products.find(product => product.id === id);
-    currentProduct.count -= 1;
-    setState(state => ({
-      ...state,
-      cart: [...state.cart]
-    }));
-  };
-
-  const removeItem = id => {
-    let currentProduct = state.products.find(product => product.id === id);
-    currentProduct.inCart = false;
-    currentProduct.count = 0;
-    setState(state => ({
-      ...state,
-      cart: [...state.cart.filter(product => product.id !== id)]
-    }));
-  };
-
   const clearCart = () => {
     state.cart.forEach(product => {
       product.inCart = false;
@@ -84,10 +49,7 @@ const ProductProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         ...state,
-        closeModal,
-        increment,
-        decrement,
-        removeItem,
+
         clearCart
       }}
     >

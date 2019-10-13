@@ -15,7 +15,7 @@ const Cart = props => {
         <>
           <Title name="your" title="cart" />
           <CartColumns />
-          <CartList state={state} />
+          <CartList cart={state.cart} />
           <CartTotals state={state} history={props.history} />
         </>
       ) : (
