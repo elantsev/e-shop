@@ -5,14 +5,17 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import { ProductProvider } from "./context";
-// require("dotenv").config();
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 ReactDOM.render(
-  <ProductProvider>
-    <Router>
-      <App />
-    </Router>
-  </ProductProvider>,
+  <Provider store={store}>
+    <ProductProvider>
+      <Router>
+        <App />
+      </Router>
+    </ProductProvider>
+  </Provider>,
   document.getElementById("root")
 );
 
