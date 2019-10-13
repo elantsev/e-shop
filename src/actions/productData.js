@@ -5,6 +5,8 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
 export const INCREMENT_ITEM = "INCREMENT_ITEM";
 export const DECREMENT_ITEM = "DECREMENT_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
+export const ADD_TOTALS = "ADD_TOTALS";
+export const CLEAR_CART = "CLEAR_CART";
 
 export function handleDetailAC(id) {
   return { type: HANDLE_DETAIL, payload: { id } };
@@ -32,4 +34,12 @@ export function decrementItemAC(id) {
 
 export function removeItemAC(id) {
   return { type: REMOVE_ITEM, payload: { id } };
+}
+
+export function addTotalsAC() {
+  return { type: ADD_TOTALS };
+}
+
+export function clearCartAC() {
+  return { type: CLEAR_CART };
 }

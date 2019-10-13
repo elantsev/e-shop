@@ -5,7 +5,9 @@ import {
   CLOSE_MODAL,
   INCREMENT_ITEM,
   DECREMENT_ITEM,
-  REMOVE_ITEM
+  REMOVE_ITEM,
+  ADD_TOTALS,
+  CLEAR_CART
 } from "../actions/productData";
 import { storeProducts as products, detailProduct } from "../data";
 
@@ -91,6 +93,31 @@ export const productData = (state = initialState, action) => {
         cart: [
           ...state.cart.filter(product => product.id !== action.payload.id)
         ]
+      };
+
+    case ADD_TOTALS:
+      let cartSubTotal = state.cart.reduce(
+        (acc, product) => acc + product.price * product.count,
+        0
+      );
+      cartSubTotal = +cartSubTotal.toFixed(2);
+      const cartTax = +(cartSubTotal * 0.1).toFixed(2);
+      const cartTotal = +(cartSubTotal + cartTax).toFixed(2);
+      return {
+        ...state,
+        cartSubTotal,
+        cartTax,
+        cartTotal
+      };
+
+    case CLEAR_CART:
+      state.cart.forEach(product => {
+        product.inCart = false;
+        product.count = 0;
+      });
+      return {
+        ...state,
+        cart: []
       };
 
     default:
