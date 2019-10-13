@@ -4,7 +4,7 @@ const Default = props => {
   return (
     <div className="container">
       <h1>404</h1>
-      <h1>error</h1> 
+      <h1>error</h1>
       <h2>page not found</h2>
       <h3>
         requested URL{" "}

@@ -12,6 +12,7 @@ const CartList = ({ cart }) => {
   const increment = id => dispatch(incrementItemAC(id));
   const decrement = id => dispatch(decrementItemAC(id));
   const removeItem = id => dispatch(removeItemAC(id));
+
   return (
     <div className="container">
       {cart.map(item => (

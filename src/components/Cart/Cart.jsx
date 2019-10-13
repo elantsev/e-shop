@@ -2,10 +2,9 @@ import React from "react";
 import Title from "../Title";
 import CartColumns from "./CartColumns";
 import EmptyCart from "./EmptyCard";
-import { ProductConsumer } from "../../context";
 import CartList from "./CartList";
 import CartTotals from "./CartTotals";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Cart = props => {
   const state = useSelector(state => state.productData);

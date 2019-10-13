@@ -13,12 +13,13 @@ const Details = ({ match }) => {
   const dispatch = useDispatch();
 
   const { id, company, img, info, price, title, inCart } = detailProduct;
-  const handleDetail = id => dispatch(handleDetailAC(id));
   const addToCart = id => dispatch(handleAddToCartAC(id));
   const openModal = id => dispatch(openModalAC(id));
+  const handleDetail = id => dispatch(handleDetailAC(id));
   if (+match.params.id !== id) {
     handleDetail(+match.params.id);
   }
+
   return (
     <div className="container py-5">
       <div className="row">

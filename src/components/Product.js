@@ -35,7 +35,6 @@ const Product = ({ product }) => {
             {inCart ? (
               <p className="text-capitalize mb-0">in cart</p>
             ) : (
-              // "add"
               <i className="fas fa-cart-plus" />
             )}
           </button>
