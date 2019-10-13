@@ -1,24 +1,22 @@
 import React from "react";
-import { ProductConsumer } from "../context";
 import { ButtonContainer } from "./Button";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { handleDetailAC } from "../actions/handleDetail";
+import { handleAddToCartAC } from "../actions/addToCart";
 
 const Details = ({ match }) => {
   const detailProduct = useSelector(state => state.productData.detailProduct);
   const dispatch = useDispatch();
   console.log(detailProduct);
-  const handleDetail = id => dispatch(handleDetailAC(id));
+
   const { id, company, img, info, price, title, inCart } = detailProduct;
+  const handleDetail = id => dispatch(handleDetailAC(id));
+  const addToCart = id => dispatch(handleAddToCartAC(id));
   if (+match.params.id !== id) {
     handleDetail(+match.params.id);
   }
   return (
-    // <ProductConsumer>
-    //   {({ detailProduct, addToCart, openModal, handleDetail }) => {
-
-    //     return (
     <div className="container py-5">
       <div className="row">
         <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
@@ -52,7 +50,7 @@ const Details = ({ match }) => {
               cart
               disabled={inCart}
               onClick={() => {
-                // addToCart(id);
+                addToCart(id);
                 // openModal(id);
               }}
             >
@@ -64,6 +62,5 @@ const Details = ({ match }) => {
     </div>
   );
 };
-// </ProductConsumer>
 
 export default Details;

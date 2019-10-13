@@ -34,19 +34,19 @@ const ProductProvider = ({ children }) => {
     }));
   };
 
-  const handleDetail = id => {
-    const currentProduct = state.products.find(product => product.id === id);
-    setState(state => ({
-      ...state,
-      detailProduct: currentProduct
-    }));
-  };
+  // const handleDetail = id => {
+  //   const currentProduct = state.products.find(product => product.id === id);
+  //   setState(state => ({
+  //     ...state,
+  //     detailProduct: currentProduct
+  //   }));
+  // };
 
   const addToCart = id => {
     let currentProduct = state.products.find(product => product.id === id);
     currentProduct.inCart = true;
     currentProduct.count = currentProduct.count += 1;
-    currentProduct.total = currentProduct.count * currentProduct.price;
+    // currentProduct.total = currentProduct.count * currentProduct.price;
     setState(state => ({
       ...state,
       cart: [...state.cart, currentProduct]
@@ -112,7 +112,7 @@ const ProductProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         ...state,
-        handleDetail,
+        // handleDetail,
         addToCart,
         openModal,
         closeModal,

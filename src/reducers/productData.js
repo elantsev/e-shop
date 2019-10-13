@@ -1,7 +1,8 @@
 import { HANDLE_DETAIL } from "../actions/handleDetail";
 import { storeProducts as products, detailProduct } from "../data";
+import { ADD_TO_CART } from "../actions/addToCart";
 
-export const initialState = {
+const initialState = {
   products,
   detailProduct,
   cart: [],
@@ -13,17 +14,28 @@ export const initialState = {
 };
 
 export const productData = (state = initialState, action) => {
+  let currentProduct;
   switch (action.type) {
     case HANDLE_DETAIL:
       console.log(state, action);
-      const currentProduct = state.products.find(
+      currentProduct = state.products.find(
         product => product.id === action.payload.id
       );
-      console.log(state, action);
-
       return {
         ...state,
         detailProduct: currentProduct
+      };
+
+    case ADD_TO_CART:
+      console.log(state, action);
+      currentProduct = state.products.find(
+        product => product.id === action.payload.id
+      );
+      currentProduct.inCart = true;
+      currentProduct.count = currentProduct.count += 1;
+      return {
+        ...state,
+        cart: [...state.cart, currentProduct]
       };
 
     default:

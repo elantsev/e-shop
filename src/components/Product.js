@@ -2,9 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { handleDetailAC } from "../actions/handleDetail";
+import { handleAddToCartAC } from "../actions/addToCart";
 
-const Product = ({ product, handleDetail, addToCart, openModal }) => {
+const Product = ({ product, openModal }) => {
   const { id, title, img, price, inCart } = product;
+  const dispatch = useDispatch();
+  const handleDetail = id => dispatch(handleDetailAC(id));
+  const addToCart = id => dispatch(handleAddToCartAC(id));
 
   return (
     <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
@@ -16,7 +22,8 @@ const Product = ({ product, handleDetail, addToCart, openModal }) => {
           <button
             className="cart-btn"
             disabled={inCart}
-            onClick={() => {
+            onClick={e => {
+              e.stopPropagation();
               addToCart(id);
               openModal(id);
             }}
