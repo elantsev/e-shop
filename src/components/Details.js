@@ -11,7 +11,6 @@ import {
 const Details = ({ match }) => {
   const detailProduct = useSelector(state => state.productData.detailProduct);
   const dispatch = useDispatch();
-  console.log(detailProduct);
 
   const { id, company, img, info, price, title, inCart } = detailProduct;
   const handleDetail = id => dispatch(handleDetailAC(id));

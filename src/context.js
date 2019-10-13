@@ -5,8 +5,8 @@ const ProductContext = React.createContext();
 
 const initialState = {
   // products,
-  detailProduct,
-  cart: [],
+  // detailProduct,
+  // cart: [],
   modalOpen: false,
   modalProduct: detailProduct,
   cartSubTotal: 0,
@@ -16,16 +16,7 @@ const initialState = {
 
 const ProductProvider = ({ children }) => {
   const [state, setState] = useState(JSON.parse(JSON.stringify(initialState)));
-  useEffect(() => addTotals(), [state.cart]);
-
-  const openModal = id => {
-    const currentProduct = state.products.find(product => product.id === id);
-    setState(state => ({
-      ...state,
-      modalProduct: currentProduct,
-      modalOpen: true
-    }));
-  };
+  // useEffect(() => addTotals(), [state.cart]);
 
   const closeModal = () => {
     setState(state => ({
@@ -93,7 +84,6 @@ const ProductProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         ...state,
-        openModal,
         closeModal,
         increment,
         decrement,

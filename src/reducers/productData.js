@@ -16,7 +16,6 @@ export const productData = (state = initialState, action) => {
   let currentProduct;
   switch (action.type) {
     case HANDLE_DETAIL:
-      console.log(state, action);
       currentProduct = state.products.find(
         product => product.id === action.payload.id
       );
@@ -26,7 +25,6 @@ export const productData = (state = initialState, action) => {
       };
 
     case ADD_TO_CART:
-      console.log(state, action);
       currentProduct = state.products.find(
         product => product.id === action.payload.id
       );
@@ -34,9 +32,10 @@ export const productData = (state = initialState, action) => {
       currentProduct.count = currentProduct.count += 1;
       return {
         ...state,
+        products: [...state.products],
         cart: [...state.cart, currentProduct]
       };
-    
+
     case OPEN_MODAL:
       currentProduct = state.products.find(
         product => product.id === action.payload.id
