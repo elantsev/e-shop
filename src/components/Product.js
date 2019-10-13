@@ -15,7 +15,6 @@ const Product = ({ product }) => {
   const handleDetail = id => dispatch(handleDetailAC(id));
   const addToCart = id => dispatch(handleAddToCartAC(id));
   const openModal = id => dispatch(openModalAC(id));
-  console.log("render", inCart);
   return (
     <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
       <div className="card">
