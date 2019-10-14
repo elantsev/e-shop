@@ -11,7 +11,7 @@ const CartTotals = ({ state, history }) => {
   const clearCart = () => dispatch(clearCartAC());
   useEffect(() => {
     addTotals();
-  }, [cart, addTotals]);
+  }, [cart]);
   return (
     <div className="container">
       <div className="row">
